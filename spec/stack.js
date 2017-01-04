@@ -11,7 +11,7 @@ describe('Stack', () => {
     expect(Stack).to.be.a('function')
   })
 
-  context('push()', () => {
+  describe('push()', () => {
     it('pushes an element to the top of the stack.', () => {
       const stack = new Stack()
 
@@ -29,7 +29,7 @@ describe('Stack', () => {
     })
   })
 
-  context('pop()', () => {
+  describe('pop()', () => {
     it('takes an element from the top of the stack.', () => {
       const stack = new Stack()
       stack.push('bob')
@@ -37,6 +37,16 @@ describe('Stack', () => {
 
       expect(() => stack.pop())
         .to.alter(() => stack.length(), { from: 2, to: 1 })
+    })
+
+    it('takes an element from the top of the stack.', () => {
+      const stack = new Stack()
+      stack.push('bob')
+      stack.push('alice')
+      stack.push('carl')
+
+      expect(stack.pop())
+        .to.equal('carl')
     })
 
     it('returns null if stack is empty', () => {
@@ -47,7 +57,7 @@ describe('Stack', () => {
     })
   })
 
-  context('peek()', () => {
+  describe('peek()', () => {
     it('returns top element (0 index) of stack.', () => {
       const stack = new Stack()
       stack.push('bob')
@@ -66,7 +76,7 @@ describe('Stack', () => {
   })
 
 
-  context('isEmpty()', () => {
+  describe('isEmpty()', () => {
     it('returns true if stack is empty or false if not.', () => {
       const stack = new Stack()
 
@@ -85,7 +95,7 @@ describe('Stack', () => {
   })
 
 
-  context('length()', () => {
+  describe('length()', () => {
     it('returns the number of elements in the stack.', () => {
       const stack = new Stack()
       stack.push('bob')
