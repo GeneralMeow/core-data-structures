@@ -63,16 +63,28 @@ describe('Stack', () => {
       expect(stack.peek())
         .to.be.null
     })
-
   })
+
+
   context('isEmpty()', () => {
-    it('pushes an element to the top of the stack.', () => {
+    it('returns true if stack is empty or false if not.', () => {
       const stack = new Stack()
 
-      expect(() => stack.push('foo'))
-        .to.alter(() => stack.length(), { from: 0, to: 1 })
+      expect(stack.isEmpty())
+        .to.equal(true)
+    })
+
+    it('returns true if stack is empty or false if not.', () => {
+      const stack = new Stack()
+      stack.push('bob')
+      stack.push('alice')
+
+      expect(stack.isEmpty())
+        .to.equal(false)
     })
   })
+
+
   context('length()', () => {
     it('pushes an element to the top of the stack.', () => {
       const stack = new Stack()
