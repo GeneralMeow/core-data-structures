@@ -86,11 +86,13 @@ describe('Stack', () => {
 
 
   context('length()', () => {
-    it('pushes an element to the top of the stack.', () => {
+    it('returns the number of elements in the stack.', () => {
       const stack = new Stack()
+      stack.push('bob')
+      stack.push('alice')
 
-      expect(() => stack.push('foo'))
-        .to.alter(() => stack.length(), { from: 0, to: 1 })
+      expect(stack.length())
+        .to.equal(2)
     })
   })
 })
