@@ -52,13 +52,14 @@ describe('priorityQueue', () => {
   })
 
   describe('front()', ()=> {
-    it('returns the front element in the queue.', () => {
+    it('returns the front element (highest priority) in.', () => {
       const queue = new priorityQueue()
-      queue.enqueue('foo')
-      queue.enqueue('bar')
+      queue.enqueue('bar', 50)
+      queue.enqueue('foo', 100)
+      queue.enqueue('fubar', 0)
 
       expect(queue.front())
-        .to.equal('foo')
+        .to.eql({entry: 'foo', priority: 100})
     })
 
     it('returns null if the queue is empty.', () => {
@@ -70,13 +71,14 @@ describe('priorityQueue', () => {
   })
 
   describe('back()', ()=> {
-    it('returns the back element in the queue.', () => {
+    it('returns back element (lowest priority) in queue', () => {
       const queue = new priorityQueue()
-      queue.enqueue('foo')
-      queue.enqueue('bar')
+      queue.enqueue('bar', 2)
+      queue.enqueue('foo', 1)
+      queue.enqueue('screwedpooch', 3)
 
       expect(queue.back())
-        .to.equal('bar')
+        .to.eql({entry: 'foo', priority: 1})
     })
 
     it('returns null if the queue is empty.', () => {
@@ -88,7 +90,7 @@ describe('priorityQueue', () => {
   })
 
   describe('isEmpty()', ()=> {
-    it('returns true if the queue is empty or false if not', () => {
+    it('returns true if the queue is empty ', () => {
       const queue = new priorityQueue()
       queue.enqueue('foo')
       queue.enqueue('bar')
@@ -96,7 +98,7 @@ describe('priorityQueue', () => {
       expect(queue.isEmpty())
         .to.be.false
     })
-    it('returns true if the queue is empty or false if not', () => {
+    it('returns false if  the queue is not empty', () => {
       const queue = new priorityQueue()
 
       expect(queue.isEmpty())

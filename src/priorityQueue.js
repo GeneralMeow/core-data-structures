@@ -12,7 +12,8 @@ makeItem(entry, priority){
 
 enqueue(entry, priority){
   let item = this.makeItem(entry, priority)
-  this.queue.unshift(item)
+  this.queue.unshift(item )
+  this.queue.sort( ( a, b ) => a.priority - b.priority  )
   this.size++
 }
 
@@ -26,8 +27,8 @@ dequeue(){
 
 front(){
   if(this.size > 0){
-    return this.queue[this.size - 1 ]
-  } else {return null}
+      return this.queue[this.size - 1 ]}
+   else {return null}
 }
 
 back(){
