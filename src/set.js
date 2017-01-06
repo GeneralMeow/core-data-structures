@@ -64,11 +64,9 @@ export default class Set{
     let thisSet = this.elements
     let results = []
     thisSet.forEach(element => {
-      console.log(element);
       if(this.contains(element) && otherSet.contains(element)){
         results.push(element)
       }
-      console.log(results);
     })
     return results
   }
@@ -115,7 +113,7 @@ export default class Set{
   }
 }
 
-//**SPECS**// 
+//**SPECS**//
 
 // set.add('D')             // adds an element to the set.
 // set.isEmpty()            // returns true if the set is empty or false if not.
