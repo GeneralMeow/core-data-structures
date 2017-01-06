@@ -33,11 +33,12 @@ export default class Set{
   }
 
   forEach(callback){
-    return this.elements.forEach(element => callback(element))
+    const newSet = this.elements.map(element => callback(element))
+    this.elements = newSet
+    return this
   }
 
   size(){
-    console.log(this.elements);
     return this.elements.length
   }
 
@@ -46,63 +47,76 @@ export default class Set{
   }
 
   union(otherSet){
-    x = this.elements
-    y = otherSet.members
-    results = []
-    y.forEach(element =>{
-      if(this.contains(element)){
-        results.push(element)
-      }
+    let thisSet = this.elements
+    let thatSet = otherSet.members()
+    let results = []
+    thatSet.forEach(element =>{
+      if(thisSet.indexOf(element) === -1){
+          results.push(element)
+        }
     })
+      thisSet.forEach(element => {
+        results.push(element)})
+    return results
   }
 
   intersect(otherSet){
-    x = this.elements
-    y = otherSet.members
-    results = []
-    y.forEach(element => {
-      if(!this.getIndex(element) === -1){
+    let thisSet = this.elements
+    let results = []
+    thisSet.forEach(element => {
+      console.log(element);
+      if(this.contains(element) && otherSet.contains(element)){
         results.push(element)
       }
+      console.log(results);
     })
+    return results
   }
 
   difference(otherSet){
-    x = this.elements
-    y = otherSet.members
-    results = []
+    let x = this.elements
+    let y = otherSet.members()
+    let results = []
     y.forEach(element => {
       if(this.getIndex(element) === -1){
         results.push(element)
       }
     })
+    let result = new Set()
+    results.forEach(element => {
+      result.add(element)
+    })
+    return result
   }
 
-  // isSubset(otherSet){
-  //   let thisSet = this.elements
-  //   let thatSet = otherSet.members
-  //   if(thisSet.length > thatSet.length){
-  //     return false
-  //   } else {
-  //       let result = []
-  //       thisSet.filter(element => {
-  //         for(let index = thisSet.length - 1; index > 0; index -- ){
-  //           if (!thatSet.contains(thisSet[index])){
-  //             result.push(thisSet[index])
-  //           }
-  //       }
-  //     }
-  //     if (result.length > 0){
-  //       return false
-  //     }
-  //   })
-  // }
 
-  // clone(){
-  //   return new Set({elements: this.elements})
-  // }
+  isSubset(otherSet){
+    let thisSet = this.elements
+    let thatSet = otherSet
+    let result = []
 
+    thisSet.filter( element => {
+      if(thatSet.contains(element)){
+        result.push(element)
+      }
+    })
+
+    if (result.length === thisSet.length){
+      return true
+    } else {return false}
+  }
+
+  clone(){
+    let clonedSet = new Set()
+    this.elements.forEach(element => {
+      clonedSet.add(element)
+    })
+    return clonedSet
+  }
 }
+
+//**SPECS**// 
+
 // set.add('D')             // adds an element to the set.
 // set.isEmpty()            // returns true if the set is empty or false if not.
 // set.contains('B')        // returns true the set contains the element or false if not.
